@@ -1,9 +1,11 @@
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
+import { router } from './Routes/router';
 
 function App() {
   return (
    <div>
-    <h1>kire mama ki obostha</h1>
+    <RouterProvider router={router} />
    </div>
   );
 }
