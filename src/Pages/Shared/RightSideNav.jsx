@@ -2,6 +2,9 @@ import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { FaFacebook, FaGithub, FaInstagram, FaTwitch, FaTwitter } from 'react-icons/fa';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Carousel from 'react-bootstrap/Carousel';
+import image1 from '../../assets/images/pic1.png';
+import image2 from '../../assets/images/pic2.png';
 
 const RightSideNav = () => {
     return (
@@ -20,6 +23,22 @@ const RightSideNav = () => {
                     <ListGroup.Item className='mb-2'><FaTwitch /> twitch</ListGroup.Item>
                 </ListGroup>
             </div>
+            <Carousel>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={image1}
+          alt="First slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={image2}
+          alt="Second slide"
+        />
+      </Carousel.Item>
+    </Carousel>
         </div>
     );
 };
