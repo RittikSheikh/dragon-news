@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { FaFacebook, FaGithub, FaInstagram, FaTwitch, FaTwitter } from 'react-icons/fa';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from '../../assets/images/pic1.png';
 import image2 from '../../assets/images/pic2.png';
+import { AuthContext } from '../../contexts/AuthProvider ';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const RightSideNav = () => {
+  const {googleLogIn, githubLogIn} = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
+  const handleGoogleLogIn = () =>{
+    googleLogIn(googleProvider)
+    .then(result =>{
+      const user = result.user;
+      console.log('google log in user', user)
+    })
+    .catch(error => console.error(error))
+  }
+
+  const handleGithubLogIn = () =>{
+    githubLogIn(githubProvider)
+    .then(result =>{
+      const user = result.user;
+      console.log('github log in user', user)
+    })
+    .catch(error => console.error(error))
+  }
+
     return (
         <div>
             <ButtonGroup vertical>
-                <Button variant="outline-primary"> <FaFacebook /> Login With Facebook</Button>
-                <Button variant="outline-dark"> <FaGithub /> Login With Github</Button>
+                <Button onClick={handleGoogleLogIn} variant="outline-primary"> <FaFacebook /> Login With Facebook</Button>
+                <Button onClick={handleGithubLogIn} variant="outline-dark"> <FaGithub /> Login With Github</Button>
             </ButtonGroup>
             <div className='mt-4'>
                 <h3  className='mb-4'>Find us on!</h3>
