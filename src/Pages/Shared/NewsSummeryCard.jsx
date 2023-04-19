@@ -1,12 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image'
 import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from "react-icons/fa";
 
-
-const News = () => {
-    const newsData = useLoaderData();
+const NewsSummeryCard = ({ newsData }) => {
     const { _id, author, details, image_url,rating, title, total_view } = newsData;
     return (
         <Card className="mb-5">
@@ -28,7 +26,7 @@ const News = () => {
             <Card.Img variant="top" src={image_url} />
                 <Card.Text>
                     {
-                       details
+                        details.length > 200 ? <>{details.slice(0, 200) + '...'} <Link to={`/news/${_id}`}>Read More</Link></> : <>{details}</>
                     }
                 </Card.Text>
             </Card.Body>
@@ -46,4 +44,4 @@ const News = () => {
     );
 };
 
-export default News;
+export default NewsSummeryCard;
