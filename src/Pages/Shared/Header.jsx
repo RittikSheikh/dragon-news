@@ -7,8 +7,8 @@ import LeftSideNav from './LeftSideNav';
 import RightSideNav from './RightSideNav';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider ';
-import { HiUser, HiUserCircle, IconName } from "react-icons/hi";
-import { Button } from 'react-bootstrap';
+import { HiUser } from "react-icons/hi";
+import { Button, Image } from 'react-bootstrap';
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
@@ -42,10 +42,11 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
+              <p>{user?.displayName}</p>
               {
-                user?.uid ? <><Button variant='light' onClick={handleLogout}>logout</Button><HiUser/></>
-                : <> <p className='me-2'><Link to='/signup'>signup</Link></p> <Link to='/login'>login</Link></>
+                user?.photoURL ? <Image style={{width: '40px', height: '40px'}} roundedCircle src={user.photoURL}/> : <HiUser/>
               }
+              <>{user?.uid ? <Button onClick={handleLogout} variant='outline-dark'>logout</Button> : <><p variant='outline-dark' className='me-2'><Link to='/login'>login</Link></p> <p variant='outline-dark'><Link to='/signup'>signup</Link></p> </>}</>
             </Nav>
             <div className='d-lg-none'>
               <LeftSideNav />

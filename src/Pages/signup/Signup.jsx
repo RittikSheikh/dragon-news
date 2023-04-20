@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Signup = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const [acceptTerms, setAcceptTerms] = useState(false);
     const handleCreateUser = (e) => {
         e.preventDefault();
@@ -21,6 +21,11 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log('created user email and password', user)
+                updateUserProfile(name, photoUrl)
+                .then(() => {
+                    console.log('profile updated')
+                })
+                .catch(error => console.error(error))
             })
             .catch(error =>{
                 console.error(error)

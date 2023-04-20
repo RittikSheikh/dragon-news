@@ -35,7 +35,11 @@ const AuthProvider  = ({children}) => {
 
     const logOut = () => signOut(auth);
 
-   
+   const updateUserProfile = (name, photoUrl) =>{
+    return updateProfile(auth.currentUser, {
+        displayName: name, photoURL: photoUrl
+    })
+   }
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
@@ -47,7 +51,7 @@ const AuthProvider  = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value={{googleLogIn, loading, githubLogIn, user, createUser, logInUser, logOut}}>
+        <AuthContext.Provider value={{googleLogIn, loading, githubLogIn, user, createUser, logInUser, logOut, updateUserProfile}}>
             {children}
         </AuthContext.Provider>
     );
