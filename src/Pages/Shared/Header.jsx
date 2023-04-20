@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -6,8 +6,19 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import LeftSideNav from './LeftSideNav';
 import RightSideNav from './RightSideNav';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider ';
+import { HiUser, HiUserCircle, IconName } from "react-icons/hi";
+import { Button } from 'react-bootstrap';
 
 const Header = () => {
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogout = () =>{
+    logOut()
+    .then(result =>{
+      console.log('logged out success')
+    })
+    .catch(error=>console.error(error))
+  }
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -31,10 +42,10 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets">More deets</Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-              </Nav.Link>
+              {
+                user?.uid ? <><Button variant='light' onClick={handleLogout}>logout</Button><HiUser/></>
+                : <> <p className='me-2'><Link to='/signup'>signup</Link></p> <Link to='/login'>login</Link></>
+              }
             </Nav>
             <div className='d-lg-none'>
               <LeftSideNav />

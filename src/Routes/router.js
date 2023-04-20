@@ -3,6 +3,10 @@ import Main from "../layouts/Main";
 import Categories from "../Pages/Categories/Categories";
 import Home from "../Pages/Home/Home";
 import News from "../Pages/News/News";
+import Login from "../Pages/login/Login";
+import Signup from "../Pages/signup/Signup";
+import PrivateRoutes from "./PrivateRoutes";
+import Terms from "../Pages/loogePage/Terms";
 
 export const router = createBrowserRouter([
     {
@@ -19,8 +23,20 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'news/:id',
-                element: <News />,
+                element: <PrivateRoutes><News /></PrivateRoutes>,
                 loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
+            },
+            {
+                path: '/login',
+                element: <Login/>
+            },
+            {
+                path: '/signup',
+                element: <Signup/>
+            },
+            {
+                path: '/terms',
+                element: <Terms/>
             }
         ]
     }
