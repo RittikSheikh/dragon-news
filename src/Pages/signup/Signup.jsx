@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Signup = () => {
 
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, errorType, setErrorType } = useContext(AuthContext);
     const [acceptTerms, setAcceptTerms] = useState(false);
     const handleCreateUser = (e) => {
         e.preventDefault();
@@ -20,6 +20,7 @@ const Signup = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                setErrorType('')
                 console.log('created user email and password', user)
                 updateUserProfile(name, photoUrl)
                 .then(() => {
@@ -29,6 +30,7 @@ const Signup = () => {
             })
             .catch(error =>{
                 console.error(error)
+                setErrorType(error.message)
             })
     }
 
@@ -54,6 +56,9 @@ const Signup = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check onClick={()=>setAcceptTerms(!acceptTerms)} type="checkbox" label={<>Accept terms and <Link to='/terms'>condition</Link></>} />
                 </Form.Group>
+                <div>
+                    <p className='text-danger'>{errorType}</p>
+                </div>
                 <Button variant="primary" type="submit" disabled={!acceptTerms}>
                     Submit
                 </Button>

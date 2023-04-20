@@ -11,6 +11,7 @@ const AuthProvider  = ({children}) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [errorType, setErrorType] = useState(null);
 
     const googleLogIn = (googleProvider) =>{
         setLoading(true)
@@ -51,7 +52,8 @@ const AuthProvider  = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value={{googleLogIn, loading, githubLogIn, user, createUser, logInUser, logOut, updateUserProfile}}>
+        <AuthContext.Provider value={{googleLogIn, loading, githubLogIn, user, createUser, logInUser, logOut, updateUserProfile, 
+        errorType, setErrorType}}>
             {children}
         </AuthContext.Provider>
     );
