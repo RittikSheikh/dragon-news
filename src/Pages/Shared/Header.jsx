@@ -11,13 +11,13 @@ import { HiUser } from "react-icons/hi";
 import { Button, Image } from 'react-bootstrap';
 
 const Header = () => {
-  const {user, logOut} = useContext(AuthContext);
-  const handleLogout = () =>{
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
     logOut()
-    .then(result =>{
-      console.log('logged out success')
-    })
-    .catch(error=>console.error(error))
+      .then(result => {
+        console.log('logged out success')
+      })
+      .catch(error => console.error(error))
   }
   return (
     <div>
@@ -43,9 +43,11 @@ const Header = () => {
             </Nav>
             <Nav>
               <p>{user?.displayName}</p>
-              {
-                user?.photoURL ? <Image style={{width: '40px', height: '40px'}} roundedCircle src={user.photoURL}/> : <HiUser/>
-              }
+              <Link to='/profile'>
+                {
+                  user?.photoURL ? <Image style={{ width: '40px', height: '40px' }} roundedCircle src={user.photoURL} /> : <HiUser />
+                }
+              </Link>
               <>{user?.uid ? <Button onClick={handleLogout} variant='outline-dark'>logout</Button> : <><p variant='outline-dark' className='me-2'><Link to='/login'>login</Link></p> <p variant='outline-dark'><Link to='/signup'>signup</Link></p> </>}</>
             </Nav>
             <div className='d-lg-none'>

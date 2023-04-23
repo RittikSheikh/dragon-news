@@ -7,6 +7,7 @@ import Login from "../Pages/login/Login";
 import Signup from "../Pages/signup/Signup";
 import PrivateRoutes from "./PrivateRoutes";
 import Terms from "../Pages/loogePage/Terms";
+import Profile from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             {
                 path: '/terms',
                 element: <Terms/>
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoutes><Profile/></PrivateRoutes>
             }
         ]
     }

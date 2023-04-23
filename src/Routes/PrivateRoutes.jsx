@@ -7,7 +7,7 @@ const PrivateRoutes = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
     const style = {
-        'margin-left': '45%' 
+        'marginLeft': '45%' 
     }
     if (loading) {
         return <Spinner style={style} animation="border" role="status"></Spinner>
